@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) patrouil 2020.
+  ~  This work is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License.
+  ~  To view a copy of this license, visit http://creativecommons.org/licenses/by-sa/4.0/.
+  ~
+  ~  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~  SOFTWARE.
+  ~
+  -->
+
+<project name="boond_candidate_form" basedir="." default="build">
+
+    <!-- wokflow to build a release pacakge
+    commit all changes on a dev branch.
+    Merge branch with master.
+    Than tag a release version number.
+    Enter that number in the version property
+    A last, launch the build target.
+    -->
+    <property environment="env"/>
+    <property name="src.dir"     value="lib"/>
+    <property name="build.dir"   value="build"/>
+
+    <!-- ALWAYS Change the release number you are working on
+each command underneath uses a git checkout with this version -->
+
+    <property name="version" value="0.0.0" />
+
+
+    <target name="clean">
+      <echo message="clean" />
+
+      <delete dir="build/web"/>
+      <delete dir="tmp"/>
+  </target>
+
+    <target name="build"  depends="clean, compile,package">
+
+    </target>
+
+    <target name="version.update" >
+        <echo message="doc generation" />
+        <replaceregexp file="README.md"
+                match="\$VERSION.+\$"
+                flags="g"
+                replace="$VERSION ${version}$"/>
+
+    </target>
+
+
+    <target name="checkout" >
+        <echo message="git checkout" />
+        <exec executable="git">
+            <arg line="checkout -f ${version}"/>
+        </exec>
+        <exec executable="git">
+            <arg line="pull"/>
+        </exec>
+    </target>
+
+    <target name="compile" >
+        <echo message="compiling" />
+        <exec executable="flutter">
+            <arg line="build web --release"/>
+        </exec>
+    </target>
+
+    <target name="package" >
+        <echo message="package" />
+
+        <mkdir dir="tmp"/>
+        <move file="build/web" todir="tmp"/>
+
+        <tar basedir="tmp/web"
+             tarfile="tmp/boond_form.tar"/>
+    </target>
+
+    <!--
+
+    THANKS TO https://gist.github.com/nzakas/1164118
+
+    Ant target for autogenerating a changelog based on Git tags
+    Workflow:
+    1. Do all of your checkins for a given version.
+    2. When you're ready to officially create a new version, tag it using git tag, such as "git tag v0.3.0".
+    3. If you don't already have a file named CHANGELOG in the root directory, make one.
+    4. Run "ant changelog.update"
+    Assumptions:
+    1. You only use tags for version numbers, that's it.
+    2. You have a file named CHANGELOG that you want to auto-update.
+    3. You want today's date stamped in the CHANGELOG file/
+
+
+-->
+
+    <property name="changelog.range" value=""/>
+
+    <target name="changelog.update">
+        <tstamp>
+            <format property="changelog.date" pattern="dd-MMM-yyyy" locale="en,UK"/>
+        </tstamp>
+
+        <exec executable="git" failonerror="true" outputproperty="changelog.tag">
+            <arg line="tag"/>
+        </exec>
+        <echoproperties prefix="changelog."/>
+
+        <script language="javascript"><![CDATA[
+        //get the two most recent tags to get the diff
+        var tags = project.getProperty("changelog.tag").replace("\r", "").split("\n"),
+            curTag = tags[tags.length-1],
+            priorTag = tags[tags.length-2];
+        project.setProperty("changelog.current", curTag);
+        project.setProperty("changelog.range", priorTag + ".." + curTag);
+    ]]></script>
+
+        <echoproperties prefix="changelog."/>
+
+        <!-- git log -pretty=format:'* %s (%an)' v0.4.0..v0.5.0-->
+        <exec executable="git" failonerror="true" outputproperty="changelog.git">
+            <arg line="log --pretty=format:'* %s (%an)' ${changelog.range}"/>
+        </exec>
+
+        <concat destfile="CHANGELOG.tmp"  fixlastline="true">
+            <header trimleading="yes">## [${changelog.current}] - ${changelog.date} -
+
+                ${changelog.git}
+            </header>
+            <fileset dir="." includes="CHANGELOG" />
+        </concat>
+
+        <delete file="CHANGELOG"/>
+        <move file="CHANGELOG.tmp" tofile="CHANGELOG"/>
+
+    </target>
+
+
+</project>

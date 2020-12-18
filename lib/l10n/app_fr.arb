@@ -1,0 +1,20 @@
+{
+  "mister" : "Monsieur",
+  "madam" : "Madame",
+  "firstname" : "prénom",
+  "mandatoryFirstName" : "le prénom est obligatoire",
+  "lastname" : "nom",
+  "mandatoryLastName" : "le nom est obligatoire",
+  "email" : "email",
+  "mandatoryEmail" : "email obligatoire",
+  "invalidEmail" : "email non valide",
+  "phoneNumber" : "no de téléphone",
+  "city" : "ville",
+  "mandatoryPhone" : "téléphone obligatoire",
+  "year" : "an",
+  "salary" : "salaire",
+  "mandatoryCV" : "CV obligatoire",
+  "thanks" : "Merci pour votre candidature\nNous prennons contact dès que possible.",
+  "error" : "Oops ! Une erreur est survenue lors de l'enregistrement.\nMerci de transmettre votre CV par mail à {email}\nMessage d'erreur : {message}"
+
+}

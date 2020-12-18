@@ -1,0 +1,30 @@
+{
+
+  "mister" : "Mister",
+  "madam" : "Madam",
+  "firstname" : "Firstname",
+  "mandatoryFirstName" : "firstname is mandatory",
+        "lastname" : "Lastname",
+  "mandatoryLastName" : "lastname is mandatory",
+  "email" : "Email",
+"mandatoryEmail" : "email is mandatory",
+  "invalidEmail" : "Not a valid email",
+  "phoneNumber" : "Phone number",
+  "city" : "City",
+  "mandatoryPhone" : "phone is mandatory",
+  "year" : "year",
+  "salary" : "Salary",
+  "mandatoryCV" : "CV is mandatory",
+  "thanks" : "Thanks for your application in our company\nWe'll reply to you shortly",
+  "error" : "Oops ! Something went wrong while recording.\nPlease send CV by email at {email}\nError message is : {message}",
+  "@error": {
+    "placeholders": {
+      "email": {
+        "type": "String"
+      },
+      "message": {
+        "type": "String"
+      }
+    }
+  }
+}

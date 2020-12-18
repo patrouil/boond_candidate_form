@@ -1,0 +1,10 @@
+{
+    "boond_host" :  "sandboxui.boondmanager.com",
+
+    "users_token" : "boond user token",
+
+    "client_key" :  "boond central client key",
+    "client_token" : "boond central client token",
+    "email.hr" :    "hiring@bigcompany.com",
+    "gdpr.message" : "place here your GDPR message"
+}
