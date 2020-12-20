@@ -12,6 +12,7 @@
  *  SOFTWARE.
  */
 
+import 'dart:html' as html;
 import 'package:global_configuration/global_configuration.dart';
 import 'package:logging/logging.dart';
 
@@ -46,6 +47,8 @@ class AppGlobals {
   }
 
   static String get hostname {
-    return Uri.base.host;
+    return html.document.referrer;
+
+    //return Uri.base.host;
   }
 }
