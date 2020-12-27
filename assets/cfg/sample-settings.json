@@ -6,5 +6,7 @@
     "client_key" :  "boond central client key",
     "client_token" : "boond central client token",
     "email.hr" :    "hiring@bigcompany.com",
-    "gdpr.message" : "place here your GDPR message"
+    "gdpr.message" : "place here your GDPR message",
+    "accept.message" : "Thanks application recordded message"
+
 }

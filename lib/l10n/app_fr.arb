@@ -14,7 +14,6 @@
   "year" : "an",
   "salary" : "salaire",
   "mandatoryCV" : "CV obligatoire",
-  "thanks" : "Merci pour votre candidature\nNous prennons contact dès que possible.",
   "error" : "Oops ! Une erreur est survenue lors de l'enregistrement.\nMerci de transmettre votre CV par mail à {email}\nMessage d'erreur : {message}"
 
 }

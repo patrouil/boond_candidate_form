@@ -12,14 +12,12 @@
  *  SOFTWARE.
  */
 
-
-import 'package:boond_candidate_form/AppGlobals.dart';
-
-import 'package:flutter/material.dart';
-import 'package:global_configuration/global_configuration.dart';
+import 'package:flutter/material.dart' show WidgetsFlutterBinding, runApp;
 import 'package:intl/intl.dart' as Intl;
 import 'package:logging/logging.dart';
+import 'package:global_configuration/global_configuration.dart';
 
+import 'AppGlobals.dart';
 import 'BoondCandidateForm.dart';
 
 void _prepareLogging() {

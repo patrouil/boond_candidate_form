@@ -12,8 +12,6 @@
  *  SOFTWARE.
  */
 
-import 'package:boond_candidate_form/AppGlobals.dart';
-import 'package:flutter/material.dart';
 import 'package:logging/logging.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -29,17 +27,19 @@ import 'package:flutter/material.dart'
         OutlineInputBorder,
         RaisedButton,
         TextFormField,
-        ToggleButtons;
-
+        ToggleButtons,
+        ListTileControlAffinity;
 import 'package:flutter/services.dart';
+
 import 'package:file_picker/file_picker.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'widget/BoondDropdownFormField.dart';
+import 'AppGlobals.dart';
 import 'ApplicationData.dart';
 import 'ApplicationRecorder.dart';
 import 'BoondCandidateForm.dart';
-import 'widget/BoondDropdownFormField.dart';
 
 class ApplicationForm extends StatefulWidget {
   static final Logger log = Logger("ApplicationForm");
@@ -65,8 +65,6 @@ class _ApplicationFormState extends State<ApplicationForm> {
   @override
   void initState() {
     super.initState();
-
-    userData.firstname = AppGlobals.hostname;
   }
 
   Widget _buildLang(BuildContext _context) {
@@ -259,7 +257,7 @@ class _ApplicationFormState extends State<ApplicationForm> {
       items: l,
       value: null,
       isDense: true,
-      hint: const Text('Salary'),
+      hint: Text(AppLocalizations.of(c).salary),
       onChanged: (String v) {
         log.fine("[_buildSalary] onChanged $v");
         userData.revenuRange = v.trim().toUpperCase();
@@ -332,6 +330,9 @@ class _ApplicationFormState extends State<ApplicationForm> {
 
   Widget _buildGDPR(BuildContext _context) {
     log.fine("[_buildGDPR] ");
+
+    if (AppGlobals.gdpr_message == null || AppGlobals.gdpr_message.isEmpty)
+      return null;
 
     Widget cb = CheckboxListTile(
       title: Text(AppGlobals.gdpr_message),

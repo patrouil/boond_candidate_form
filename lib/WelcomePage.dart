@@ -14,7 +14,7 @@
 
 import 'package:boond_candidate_form/ApplicationForm.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Scaffold;
 
 class WelcomePage extends StatelessWidget {
   static String route = "/";

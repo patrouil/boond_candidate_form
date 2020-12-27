@@ -71,7 +71,8 @@ class ApplicationRecorder {
     http.Client c = boond.BoondAuth.clientTokenAuth(
         clientToken: AppGlobals.client_token,
         userToken: AppGlobals.user_token,
-        clientKey: AppGlobals.client_key);
+        clientKey: AppGlobals.client_key,
+        traceLevel: log.level);
 
     this.bSession = boond.BoondApi(c, AppGlobals.boond_host);
   }
@@ -177,7 +178,7 @@ class ApplicationRecorder {
     const double targetSize = 100.0;
 
     return AlertDialog(
-      elevation: 5.0,
+      //elevation: 5.0,
       backgroundColor: Colors.transparent,
       content: Center(
         child: Container(

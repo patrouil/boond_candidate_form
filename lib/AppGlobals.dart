@@ -26,29 +26,32 @@ class AppGlobals {
   static const String _CLIENT_TOKEN = 'client_token';
   static const String _GDPR_MESSAGE = 'gdpr.message';
   static const String _EMAIL_HR = "email.hr";
+  static const String _ACCEPT_MESSAGE = "accept.message";
 
   AppGlobals() {
     //log.level = Level.FINE;
   }
 
-  static String get boond_host => GlobalConfiguration().getValue(_BOOND_HOST);
+  static String get boond_host =>
+      GlobalConfiguration().getValue<String>(_BOOND_HOST);
 
-  static String get user_token => GlobalConfiguration().getValue(_USER_TOKEN);
+  static String get user_token =>
+      GlobalConfiguration().getValue<String>(_USER_TOKEN);
 
-  static String get client_key => GlobalConfiguration().getValue(_CLIENT_KEY);
+  static String get client_key =>
+      GlobalConfiguration().getValue<String>(_CLIENT_KEY);
 
-  static String get email_hr => GlobalConfiguration().getValue(_EMAIL_HR);
+  static String get email_hr =>
+      GlobalConfiguration().getValue<String>(_EMAIL_HR);
 
   static String get client_token =>
-      GlobalConfiguration().getValue(_CLIENT_TOKEN);
+      GlobalConfiguration().getValue<String>(_CLIENT_TOKEN);
 
   static String get gdpr_message {
-    return GlobalConfiguration().getValue(_GDPR_MESSAGE);
+    return GlobalConfiguration().getValue<String>(_GDPR_MESSAGE);
   }
 
-  static String get hostname {
-    return html.document.referrer;
-
-    //return Uri.base.host;
-  }
+  static String get accept_message =>
+      GlobalConfiguration().getValue<String>(_ACCEPT_MESSAGE) ??
+      "well done see you soon";
 }

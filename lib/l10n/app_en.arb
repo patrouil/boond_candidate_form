@@ -15,7 +15,7 @@
   "year" : "year",
   "salary" : "Salary",
   "mandatoryCV" : "CV is mandatory",
-  "thanks" : "Thanks for your application in our company\nWe'll reply to you shortly",
+
   "error" : "Oops ! Something went wrong while recording.\nPlease send CV by email at {email}\nError message is : {message}",
   "@error": {
     "placeholders": {

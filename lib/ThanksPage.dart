@@ -12,9 +12,9 @@
  *  SOFTWARE.
  */
 
+import 'package:boond_candidate_form/AppGlobals.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart' show Scaffold, Text;
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter/material.dart' show Scaffold;
 
 class ThanksPage extends StatelessWidget {
   static String route = "/thanks";
@@ -25,12 +25,15 @@ class ThanksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String msg = AppGlobals.accept_message;
+
+    if (msg == null || msg.isEmpty) msg = "OK";
     return Scaffold(
       appBar: null,
       drawer: null,
       body: Center(
           child: Text(
-        AppLocalizations.of(context).thanks,
+        msg,
         textAlign: TextAlign.center,
       )),
     );
